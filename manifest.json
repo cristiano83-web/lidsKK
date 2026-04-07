@@ -1,0 +1,10 @@
+{  
+    "name": "lista de compras",
+    "short_name": "listacompras",
+    "descripton": "aplicativo para listas de compras",
+    "start_url": "/", 
+    "display": "standalone",
+     "background_color": "ffffff",
+     "thene_color": "bo228c"
+     
+} 
