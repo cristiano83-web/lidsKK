@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +7,183 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="src/css/index.css">
     <title>Lista 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .titulo {
+            color: #333;
+            font-size: 28px;
+            margin: 0;
+        }
+        
+        .btn-sair {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-sair:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-demo {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-demo:hover {
+            transform: scale(1.05);
+        }
+        
+        .status {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        ul {
+            list-style: none;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .add-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .add-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        
+        .info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header {
+                flex-direction: column;
+            }
+            
+            .btn-sair, .btn-demo {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2 class="titulo">Minha lista de compras</h2>
-        <button onclick="logout()">Sair</button>
+        <div class="header">
+            <h2 class="titulo">📝 Minha lista de compras</h2>
+            <div>
+                <button class="btn-demo" id="btnModoDemo" onclick="ativarModoDemo()">📱 Usar sem Login</button>
+                <button class="btn-sair" onclick="logout()">🚪 Sair</button>
+            </div>
+        </div>
+        
+        <div class="status" id="statusModo">
+            Carregando...
+        </div>
+        
         <ul id="lista"></ul>
-        <input type="text" id="item" placeholder="Novo Item">
-        <button onclick="adicionarItem()">Adicionar</button>
+        
+        <div class="input-group">
+            <input type="text" id="item" placeholder="Digite um novo item..." autocomplete="off">
+            <button class="add-btn" onclick="adicionarItem()">+ Adicionar</button>
+        </div>
+        
+        <div class="info">
+            💡 Dica: Seu progresso é salvo automaticamente
+        </div>
     </div>
 
     <script type="module" src="app.js"></script>
 
     <script>
+        // Service Worker para PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js')
@@ -32,10 +196,8 @@
             });
         }
     </script>
-    
 </body>
 </html>
-
 
 
 
